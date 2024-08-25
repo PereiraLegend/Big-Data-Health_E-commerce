@@ -8,6 +8,8 @@ import Skeleton from "react-loading-skeleton";
 import { IoClose } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import AnimatedButton from '../AnimatedButtom/animatedbuttom';
+import Menu from '../Menu/Menu';
+import { useRouter } from 'next/navigation';
 
 
 export default function Home() {
@@ -18,6 +20,8 @@ export default function Home() {
     const [Pesquisaprod, setPesquisaprod] = useState("");
     const [filtroPreco, setFiltroPreco] = useState<"menor" | "maior" | null>(null);
     const [categoriaSelecionada, setCategoriaSelecionada] = useState<string | null>(null);
+
+    const router = useRouter()
 
     const MenuA = () => {
         setAbrir(!Abrir);
@@ -151,18 +155,7 @@ export default function Home() {
 
     return (
         <div className="flex flex-col min-h-screen" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, lineHeight: '19px' }}>
-            <main className="w-[100%] h-[101px] bg-[#0F52BA] flex justify-between items-center relative">
-                <div className="ml-[5%]">
-                    {/* <Image src="" alt="Minha imagem" width={300} height={100} className="pt-2" /> */}
-                    <div className="text-4xl text-white font-bold cursor-pointer">E-commerce</div>
-                </div>
-
-                <div className="mr-[5%]">
-                    <motion.button type="button" onClick={MenuA} className="bg-white p-2 rounded-lg cursor-pointer hover:bg-slate-500 flex items-center" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <IoCart size={40} className="mr-2" /><p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: 32 }}>{calcularTotalItensCarrinho()}</p>
-                    </motion.button>
-                </div>
-            </main>
+             <Menu calcularTotalItensCarrinho={calcularTotalItensCarrinho} MenuA={MenuA} />
 
             <div className="flex justify-center mt-12 mb-[-12]">
                 <input
@@ -236,17 +229,19 @@ export default function Home() {
                         <motion.div key={index} className="bg-white border rounded-xl shadow-md w-[218px] h-[285px] relative" whileHover={{ scale: 1.05, opacity: 1 }} style={{
                             transition: 'box-shadow 0.3s ease-in-out, height 0.3s ease-in-out',
                         }}>
-                            <div className="flex justify-center items-center">
-                            <img src={item.image} alt={item.title} className="w-[150px] h-[150px]" />
-                            </div>
-                            <div className="flex justify-between p-2">
-                            <h3 className="text-[16px] font-semibold text-[#2C2C2C]">{formatarTitulo(item.title, 60)}</h3>
-                            <div>
-                                <div className="flex-col">
-                                    <p className="text-white bg-[#373737] p-1 rounded-lg text-[15px] font-bold">R${Math.trunc(item.price)}</p>
-                                    <p className="text-yellow-500 p-1 rounded-lg text-[15px] font-bold flex">{item.rating.rate}<FaStar /></p>
+                            <div onClick={() => router.push(`/produtos/${item.id}`)}>
+                                <div className="flex justify-center items-center">
+                                <img src={item.image} alt={item.title} className="w-[150px] h-[150px]" />
                                 </div>
-                            </div>
+                                <div className="flex justify-between p-2">
+                                <h3 className="text-[16px] font-semibold text-[#2C2C2C]">{formatarTitulo(item.title, 60)}</h3>
+                                <div>
+                                    <div className="flex-col">
+                                        <p className="text-white bg-[#373737] p-1 rounded-lg text-[15px] font-bold">R${Math.trunc(item.price)}</p>
+                                        <p className="text-yellow-500 p-1 rounded-lg text-[15px] font-bold flex">{item.rating.rate}<FaStar /></p>
+                                    </div>
+                                </div>
+                                </div>
                             </div>
                             {/* <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300, lineHeight: '12px' }} className="text-[#2C2C2C] text-[10px] leading-3 ml-3 mr-3">{item.description}</p> */}
                             <AnimatedButton onClick={() => adicionarAoCarrinho(item)}>COMPRAR</AnimatedButton>
