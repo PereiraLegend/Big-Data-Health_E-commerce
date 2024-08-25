@@ -9,8 +9,6 @@ import { IoClose } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import AnimatedButton from '../AnimatedButtom/animatedbuttom';
 import Menu from '../Menu/Menu';
-import { useRouter } from 'next/navigation';
-
 
 export default function Home() {
     const [Abrir, setAbrir] = useState(false);
@@ -20,8 +18,6 @@ export default function Home() {
     const [Pesquisaprod, setPesquisaprod] = useState("");
     const [filtroPreco, setFiltroPreco] = useState<"menor" | "maior" | null>(null);
     const [categoriaSelecionada, setCategoriaSelecionada] = useState<string | null>(null);
-
-    const router = useRouter()
 
     const MenuA = () => {
         setAbrir(!Abrir);
@@ -229,7 +225,7 @@ export default function Home() {
                         <motion.div key={index} className="bg-white border rounded-xl shadow-md w-[218px] h-[285px] relative" whileHover={{ scale: 1.05, opacity: 1 }} style={{
                             transition: 'box-shadow 0.3s ease-in-out, height 0.3s ease-in-out',
                         }}>
-                            <div onClick={() => router.push(`/produtos/${item.id}`)}>
+                            <div>
                                 <div className="flex justify-center items-center">
                                 <img src={item.image} alt={item.title} className="w-[150px] h-[150px]" />
                                 </div>
