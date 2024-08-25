@@ -9,6 +9,7 @@ import { IoClose } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import AnimatedButton from '../AnimatedButtom/animatedbuttom';
 import Menu from '../Menu/Menu';
+import { Product } from "../../services/apiProducts";
 
 export default function Home() {
     const [Abrir, setAbrir] = useState(false);
@@ -61,7 +62,7 @@ export default function Home() {
         }
     };
 
-    const formatarTitulo = (text, max) => {
+    const formatarTitulo = (text: string, max: number): string => {
         if (text.length > max) {
             return text.substring(0, max) + '...';
         } else {
@@ -166,7 +167,7 @@ export default function Home() {
             <div className="flex justify-center mt-4 mb-6 space-x-4">
                 <button
                     className={`p-2 rounded-lg ${!filtroPreco ? "bg-blue-500 text-white" : "bg-gray-300"}`}
-                    onClick={() => limparFiltros(null)}
+                    onClick={() => limparFiltros()}
                 >
                     Limpar Filtros
                 </button>

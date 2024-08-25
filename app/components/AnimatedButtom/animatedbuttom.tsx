@@ -2,7 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiShoppingBag } from 'react-icons/fi';
 
-const AnimatedButton = ({ onClick, children }) => {
+interface AnimatedButtonProps {
+  onClick: () => void;
+  children: React.ReactNode;
+}
+
+const AnimatedButton: React.FC<AnimatedButtonProps> = ({ onClick, children }) => {
   return (
     <motion.button
       onClick={onClick}
