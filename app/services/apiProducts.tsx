@@ -6,7 +6,7 @@ const API = `https://fakestoreapi.com/products`;
 
 const fetchProducts = async () => {
   const { data } = await axios.get(API);
-  return data; // Retorna a lista de produtos diretamente
+  return data; 
 };
 
 export default function Products() {
